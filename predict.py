@@ -47,7 +47,11 @@ def mypredictor(environ, start_response):
     # while the model is deployed. Here we remove the full predictions
     # details as we are only interested in tracking the rest of the results.
     
-    #json_response = json.dumps({'vh_metadata': {k: v for k, v in prediction.items() if k != 'predictions'}})
+    #json_response = json.dumps({
+    #    'vh_metadata': { 
+    #        "prediction": str(prediction[0])
+    #        }
+    #    })
     #print(json_response)
 
     # Send a response back with the prediction

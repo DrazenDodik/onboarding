@@ -4,11 +4,11 @@
 * Python 3 and pip
 
 ## Setup
-* `pip install valohai-cli`
+* `pip3 install valohai-cli`
 * `vh login`
 * (optional) Install the Jupyter notebook addon
-    * `pip install notebook`
-    * `pip install jupyhai`
+    * `pip3 install notebook`
+    * `pip3 install jupyhai`
     * `jupyhai install`
 
 ## Snippets
@@ -34,6 +34,19 @@ def parse_args():
     return parser.parse_args()
 
 args = parse_args()
+```
+
+**Deployment (yaml):**
+```yaml
+- endpoint:
+    name: digit-predict
+    description: predict digits from image inputs
+    image: tensorflow/tensorflow:2.0.1
+    wsgi: predict:mypredictor
+    files:
+        - name: model
+          description: Model output file from TensorFlow
+          path: model.h5
 ```
 
 ## Further reading
