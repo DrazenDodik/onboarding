@@ -49,6 +49,29 @@ args = parse_args()
           path: model.h5
 ```
 
+**Pipeline:**
+
+* Create a new deployment in your project called `mydeployment`
+
+```yaml
+
+- pipeline:
+    name: Train and deploy pipeline
+    nodes:
+      - name: train-node
+        type: execution
+        step: Train MNIST model
+      - name: deploy-node
+        type: deployment
+        deployment: mydeployment
+        endpoints:
+          - digit-predict
+    edges:
+      - [train-node.output.model*, deploy-node.file.digit-predict.model]
+
+
+```
+
 ## Further reading
 * 🗄 [Setting up your data store](https://docs.valohai.com/tutorials/cloud-storage/)
 * 📈 [Using parameters and Tasks](https://docs.valohai.com/tutorials/valohai/advanced/#use-tasks-for-hyperparameter-optimization)
