@@ -38,7 +38,7 @@ default_parameters = {
   'epoch': 6
 }
 ```
-And use it like `valohai.parameters('epoch').value d`
+And use it like `valohai.parameters('epoch').value`
 
 **Create step:**
 ```python
