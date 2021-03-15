@@ -6,6 +6,7 @@
 ## Setup
 * `pip3 install valohai-cli`
 * `vh login`
+* Install the Python helper library `pip3 install valohai-utils` 
 * (optional) Install the Jupyter notebook addon
     * `pip3 install notebook`
     * `pip3 install jupyhai`
@@ -13,28 +14,36 @@
 
 ## Snippets
 
-**MNIST Dataset:** s3://onboard-sample/tf-sample/mnist.npz
+**MNIST Dataset:** https://onboard-sample.s3-eu-west-1.amazonaws.com/tf-sample/mnist.npz
+```python
+default_inputs = {
+  'mnist': 'https://onboard-sample.s3-eu-west-1.amazonaws.com/tf-sample/mnist.npz'
+}
+```
+
+And use it like `valohai.inputs('mnist').path()`
 
 **Log metadata:**
 ```python
 def logMetadata(epoch, logs):
-    print()
-    print(json.dumps({
-        'epoch': epoch,
-        'loss': str(logs['loss']),
-        'acc': str(logs['accuracy']),
-    }))
+  with valohai.metadata.logger() as logger:
+		logger.log("epoch", epoch)
+		logger.log("accuracy", logs['accuracy'])
+		logger.log("loss", logs['loss'])
 ```
 
 **Parse arguments:**
 ```python
-def parse_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--epoch', type=int, default=6)
-    return parser.parse_args()
-
-args = parse_args()
+default_parameters = {
+  'epoch': 6
+}
 ```
+And use it like `valohai.parameters('epoch').value d`
+
+**Create step:**
+`valohai.prepare(step='train', default_parameters=default_parameters, default_inputs=default_inputs)`
+
+And run `vh yaml step train.py`
 
 **Deployment (yaml):**
 ```yaml
@@ -68,7 +77,6 @@ args = parse_args()
           - digit-predict
     edges:
       - [train-node.output.model*, deploy-node.file.digit-predict.model]
-
 
 ```
 

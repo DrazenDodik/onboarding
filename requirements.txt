@@ -1,2 +1,4 @@
+tensorflow
 werkzeug
 pillow
+valohai-utils

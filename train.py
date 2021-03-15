@@ -2,12 +2,14 @@ import tensorflow as tf
 import json
 import argparse
 import numpy
+import valohai
 
 # Load dataset
 mnist = tf.keras.datasets.mnist
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
 
 # TODO: Load data
+# file_path = ''
 #with numpy.load(file_path, allow_pickle=True) as f:
 #    x_train, y_train = f['x_train'], f['y_train']
 #    x_test, y_test = f['x_test'], f['y_test']
