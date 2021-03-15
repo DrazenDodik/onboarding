@@ -41,7 +41,9 @@ default_parameters = {
 And use it like `valohai.parameters('epoch').value d`
 
 **Create step:**
-`valohai.prepare(step='train', default_parameters=default_parameters, default_inputs=default_inputs)`
+```python
+valohai.prepare(step='train', default_parameters=default_parameters, default_inputs=default_inputs)
+```
 
 And run `vh yaml step train.py`
 
